@@ -18,7 +18,7 @@ Subscribe to a Scene.  Server will reply with the current Scene object.  Additio
 #### `["unsub", "<name of scene>"]`
 Unsubscribe from a Scene.  Server will reply with `[true]` upon success.
 
-## Server/Hub messages
+## Hub messages
 
 #### `["up", "<name of scene>", "<json patch>"]`
 A delta of the JSON ([JSON Patch RFC 6902](http://tools.ietf.org/html/rfc6902)) to be applied to the specified scene.
