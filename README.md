@@ -12,10 +12,10 @@ Most Web Applications will run their authentication through HTTPS, with the serv
 ##### `["auth", "<some password>"]`
 Upon connection of the socket, the client should emit an `"auth"` event.  The only data passed with the event will be the Hub's set password.  This will be compared with stored value on the server.  If equal the server replies `[true]`, otherwise the socket is closed.  If 10 seconds has elapsed and no `"auth"` event has been recieved, then the Hub will close the socket connection.
 
-##### `["save", <Scene Object>]`
+##### `["saveScene", <Scene Object>]`
 Save a Scene to the database.
 
-##### `["list"]`
+##### `["listScenes"]`
 Return a list of Scenes that can be subscribed to.  Will be an array of strings.
 
 ##### `["sub", "<name of scene>"]`
