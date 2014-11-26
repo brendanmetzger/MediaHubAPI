@@ -26,8 +26,8 @@ Unsubscribe from a Scene.  Server will reply with `[true]` upon success.
 
 ## Hub messages
 
-##### `["sceneUpdate", "<name of scene>", "<json patch>"]`
+##### `["sceneUpdate", "<id of scene>", "<json patch>"]`
 A delta of the JSON ([JSON Patch RFC 6902](http://tools.ietf.org/html/rfc6902)) to be applied to the specified scene.
 
-##### `["show", "<name of scene>", "<name of media object>", <display information>]`
+##### `["show", "<id of scene>", "<name of media object>", <display information>]`
 Instructions to show a specific media object listed in a scene.  `<display information>` may be any valid datatype.  It is expected that the subscribed client will know how to process it.
