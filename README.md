@@ -18,10 +18,10 @@ Save a Scene to the database.
 ##### `["listScenes"]`
 Return a list of Scenes that can be subscribed to.  Will be an array of strings.
 
-##### `["sub", "<name of scene>"]`
+##### `["sub", "<id of scene>"]`
 Subscribe to a Scene.  Server will reply with the current Scene object.  Additionally this will subscribe the client to updates to the Scene as it changes. 
 
-##### `["unsub", "<name of scene>"]`
+##### `["unsub", "<id of scene>"]`
 Unsubscribe from a Scene.  Server will reply with `[true]` upon success.
 
 ## Hub messages
