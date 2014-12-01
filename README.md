@@ -9,8 +9,8 @@ A word on security:
 
 Most Web Applications will run their authentication through HTTPS, with the server generating some type of token for the client.  The client then makes a seperate WebSocket connection and passes the token with each communication sent through the WebSocket.  This process requires respecting [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy), remembering to allow for [CORS](https://en.wikipedia.org/wiki/Same-origin_policy#Cross-Origin_Resource_Sharing) when we want to allow grant access to clients not hosted on the same domain as the Hub.  Although this project is starting with browser based clients, it does not plan on being limited to them.  Therefore utilizing browser based security methods seems to be bad idea.  WebSockets are not subject to Same-origin policy and therefore restricting/authenticating clients will be done within the socket.  All sockets should be opened under wss:// so as to mask the password sent from the client during the "auth" event.
 
-##### `["auth", "<some password>"]`
-Upon connection of the socket, the client should emit an `"auth"` event.  The only data passed with the event will be the Hub's set password.  This will be compared with stored value on the server.  If equal the server replies `[true]`, otherwise the socket is closed.  If 10 seconds has elapsed and no `"auth"` event has been recieved, then the Hub will close the socket connection.
+##### `["auth", {password: "<password>", token: "<token from previous session>"]`
+Upon connection of the socket, the client should emit an `"auth"` event.  The authentication object can either have the `password` key or the `token` key.  If either are valid the hub will respond with a token (will be same token if `token` was sent), otherwise the socket is closed.  If 10 seconds has elapsed and no `"auth"` event has been recieved, then the Hub will close the socket connection.
 
 ##### `["saveScene", <Scene Object>]`
 Save a Scene to the database.
