@@ -15,6 +15,13 @@ Upon connection of the socket, the client should emit an `"auth"` event.  The au
 ##### `["saveScene", <Scene Object>]`
 Save a Scene to the database.
 
+##### `["loadScene", "<id of scene>"]`
+Get contents of a scene.  Server will reply with json object representing the scene.
+
+##### `["delteScene", "<id of scene>"]`
+Delete specified scene from the database.
+
+
 ##### `["listScenes"]`
 Return a list of Scenes that can be subscribed to.  Will be an array of strings.
 
