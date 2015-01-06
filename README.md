@@ -18,7 +18,7 @@ Save a Scene to the database.
 ##### `["loadScene", "<id of scene>"]`
 Get contents of a scene.  Server will reply with json object representing the scene.
 
-##### `["delteScene", "<id of scene>"]`
+##### `["deleteScene", "<id of scene>"]`
 Delete specified scene from the database.
 
 
