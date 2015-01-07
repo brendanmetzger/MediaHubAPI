@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Media Scene",
+    "description": "A document representing a collection of media assets and their tags",
+    "type": "object",
+    "properties": {
+    	"_id": {
+    		"description": "unique identifier for this scene",
+    		"type": "string"
+    	},
+    	"name": {
+    		"description": "human readable name to refer to the scene by",
+    		"type": "string"
+    	},
+    	"themes": {
+    		"description": "represents sets of tags bundled together to make a coherent theme. Each property represents a singular theme.",
+    		"type": "object",
+    		"additionalProperties": {
+    			"description": "Comma seperated list of tags that belong to this theme.",
+    			"type": "string"
+    		}
+    	},
+    	"scene": {
+    		"description": "a collection of objects representing the various assets of a scene",
+    		"type": "array",
+    		"items": {
+    			"type": "object",
+    			"properties": {
+    				"url": {
+    					"description": "Url pointing to media asset",
+    					"type": "string"
+					},
+    				"type": {
+    					"description": "Kind of media it is (currently only 'image' is supported)",
+    					"type": "string"
+					},
+    				"tags": {
+    					"description": "Semantic tags for this asset, comma seperated",
+    					"type": "string"
+					}
+    			},
+    			"required": ["url", "type", "tags"]
+    		}
+    	}
+    },
+    "required": ["_id", "name", "scene"]
+}
