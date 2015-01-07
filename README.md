@@ -38,3 +38,8 @@ A delta of the JSON ([JSON Patch RFC 6902](http://tools.ietf.org/html/rfc6902)) 
 
 ##### `["show", "<id of scene>", "<name of media object>", <display information>]`
 Instructions to show a specific media object listed in a scene.  `<display information>` may be any valid datatype.  It is expected that the subscribed client will know how to process it.
+
+Scene Schema
+===========
+
+Included is a [JSON Schema](http://json-schema.org/) for a validation purposes and understanding the format of a media scene.  [You can view that here](media-scene-schema.json)
