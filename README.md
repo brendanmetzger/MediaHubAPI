@@ -42,4 +42,4 @@ Instructions to show a specific media object listed in a scene.  `<display infor
 Scene Schema
 ===========
 
-Included is a [JSON Schema](http://json-schema.org/) for a validation purposes and understanding the format of a media scene.  [You can view that here](media-scene-schema.json)
+Included is a [JSON Schema](http://json-schema.org/) for a validation purposes and understanding the format of a media scene.  [You can view that here](media-scene-schema.json).
