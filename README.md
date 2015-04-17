@@ -72,8 +72,15 @@ socket.on('sceneUpdate', function(scene) {
 });
 ```
 
-##### `"command", "<room id>", "<commandName>", commandValue`
+##### `"command"`
 If a client triggers a "sendCommand" to a room, any client registered in that room will recieve the command.
+
+```
+socket.on('command', function(commandData) {
+    // do something with commandData
+});
+```
+
 
 Scene Schema
 ===========
