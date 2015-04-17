@@ -12,6 +12,10 @@
 				color: red;
 			}
 
+			label {
+				display: block;
+			}
+
 			button {
 				margin: 0 5px;
 			}
@@ -24,8 +28,8 @@
 		
 		<form id='login-form'>
 			<h3 id='status'></h3>
-			<label>Url: <input type='url' name='url' required /></label>
-			<label>Password: <input type='password' name='password' required /></label>
+			<label>Hub Url: <input type='url' name='url' required /></label>
+			<label>Hub Password: <input type='password' name='password' required /></label>
 			<input type='submit' id='submit' name='submit' />
 		</form>
 
@@ -48,7 +52,6 @@
 		<!-- load socket.io library from active hub instance so that the client/server library
 			 versions will match -->
 		<script src='http://smamediahub.azurewebsites.net/socket.io/socket.io.js'></script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/q.js/1.1.2/q.js'></script>
 
 		<script>
 			(function() {
@@ -63,14 +66,34 @@
 					themeButtons = document.querySelector('#theme-buttons'),
 					submitBtn = document.querySelector('#submit');
 
-				function showError (msg) {
-					errorBox.innerHTML = msg.toString();
-				}
+				/* SETUP EVENT LISTENERS */
+				document.querySelector('#login-form').addEventListener('submit', function(e) {
+					e.preventDefault();
+					
+					errorBox.innerHTML = '';
+					submitBtn.disabled = true;
+					submitBtn.value = 'Logging in...';
+					
+					tryLogin(this.url.value, this.password.value);
+					
+				});
+
+				
+				sceneSelect.addEventListener('change', function(e) {
+					makeThemeButtons(this.value);
+				});
+
+
+				themeButtons.addEventListener('click', function(e) {
+					if (e.target.nodeName === 'BUTTON') {
+						var theme = e.target.innerHTML;
+						socket.emit('sendCommand', currentSceneId, 'showTheme', theme);
+					}
+				});
 
 				function tryLogin (url, password) {
 					// connect  
 					socket = io.connect(url, {
-				        transports: ['websocket'],
 				        forceNew: true
 				    });
 
@@ -87,17 +110,6 @@
 				    	});
 				    });
 				}
-
-				    // connect to the hub handling succes and failure					
-				// 	client.connect(url, {password: password})
-				// 		.then(showSceneNames)
-				// 		.fail(function(err) {
-				// 			errorBox.innerHTML = err.toString();
-				// 		})
-				// 		.fin(function() {
-							
-				// 		});
-				// }
 
 				// update dropdown list to scene names
 				function showSceneNames () {
@@ -142,27 +154,9 @@
 					});
 				}
 
-				document.querySelector('#login-form').addEventListener('submit', function(e) {
-					e.preventDefault();
-					
-					errorBox.innerHTML = '';
-					submitBtn.disabled = true;
-					submitBtn.value = 'Logging in...';
-					
-					tryLogin(this.url.value, this.password.value);
-					
-				});
-
-				sceneSelect.addEventListener('change', function(e) {
-					makeThemeButtons(this.value);
-				});
-
-				themeButtons.addEventListener('click', function(e) {
-					if (e.target.nodeName === 'BUTTON') {
-						var theme = e.target.innerHTML;
-						client.sendCommand(currentSceneId, 'showTheme', theme);
-					}
-				});
+				function showError (msg) {
+					errorBox.innerHTML = msg.toString();
+				}
 				
 			}).call(this);
 			
