@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MediaHubClient as theme controller</title>
+		<style>
+			#step2, #step3 {
+				opacity: 0;
+				transition: opacity 0.5s;
+			}
+
+			#status {
+				color: red;
+			}
+
+			button {
+				margin: 0 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>MediaHubClient as theme controller</h1>
+		
+		<h2>Step 1: Login to a hub</h2>
+		
+		<form id='login-form'>
+			<h3 id='status'></h3>
+			<label>Url: <input type='url' name='url' required /></label>
+			<label>Password: <input type='password' name='password' required /></label>
+			<input type='submit' id='submit' name='submit' />
+		</form>
+
+		<div id='step2'>
+			<h2>Step 2: Select a Scene</h2>
+			<label>
+				Select a Scene:
+				<select name='sceneSelect' id='scene-select'></select>
+			</label>	
+		</div>
+
+		<div id='step3'>
+			<h2>Step 3: Trigger a theme</h2>
+			<div id='theme-buttons'>
+				
+			</div>
+		</div>
+		
+
+		<!-- load socket.io library from active hub instance so that the client/server library
+			 versions will match -->
+		<script src='http://smamediahub.azurewebsites.net/socket.io/socket.io.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/q.js/1.1.2/q.js'></script>
+
+		<script>
+			(function() {
+				'use strict';
+
+				var socket,
+					currentSceneId,
+					errorBox = document.querySelector('#status'),
+					step2 = document.querySelector('#step2'),
+					step3 = document.querySelector('#step3'),
+					sceneSelect = document.querySelector('#scene-select'),
+					themeButtons = document.querySelector('#theme-buttons'),
+					submitBtn = document.querySelector('#submit');
+
+				function showError (msg) {
+					errorBox.innerHTML = msg.toString();
+				}
+
+				function tryLogin (url, password) {
+					// connect  
+					socket = io.connect(url, {
+				        transports: ['websocket'],
+				        forceNew: true
+				    });
+
+				    socket.on('connect', function() {
+				    	socket.emit('auth', {password: password}, function(err) {
+				    		if (err) {
+				    			showError(err);
+				    		} else {
+				    			showSceneNames();
+				    		}
+
+				    		submitBtn.disabled = false;
+				    		submitBtn.value = 'Submit';
+				    	});
+				    });
+				}
+
+				    // connect to the hub handling succes and failure					
+				// 	client.connect(url, {password: password})
+				// 		.then(showSceneNames)
+				// 		.fail(function(err) {
+				// 			errorBox.innerHTML = err.toString();
+				// 		})
+				// 		.fin(function() {
+							
+				// 		});
+				// }
+
+				// update dropdown list to scene names
+				function showSceneNames () {
+					// clear old options
+					sceneSelect.innerHTML = '';
+
+					socket.emit('listScenes', function(err, names) {
+						// build new options with list of scenes in hub
+						sceneSelect.appendChild(document.createElement('option'));
+						for (var i = 0; i < names.length; i++) {
+							var opt = document.createElement('option');
+							opt.value = names[i]._id;
+							opt.innerHTML = names[i].name;
+							sceneSelect.appendChild(opt);
+						}
+
+						step2.style.opacity = 1;
+					});						
+				}
+
+				// make buttons for themes in scene
+				function makeThemeButtons (sceneId) {
+					// hide and clear out old buttons if any
+					step3.style.opacity = 0;
+					themeButtons.innerHTML = '';
+					currentSceneId = sceneId;
+					// get the scene json
+					socket.emit('loadScene', sceneId, function(err, scene) {
+						// make a button for each scene name
+						if (scene.themes && Object.keys(scene.themes).length > 0) {
+							for (var theme in scene.themes) {
+								var button = document.createElement('button');
+								button.innerHTML = theme;
+								themeButtons.appendChild(button);
+							}	
+						} else {
+							themeButtons.innerHTML = '<p>No themes in selected scene</p>';
+						}
+						
+						// show the buttons
+						step3.style.opacity = 1;
+					});
+				}
+
+				document.querySelector('#login-form').addEventListener('submit', function(e) {
+					e.preventDefault();
+					
+					errorBox.innerHTML = '';
+					submitBtn.disabled = true;
+					submitBtn.value = 'Logging in...';
+					
+					tryLogin(this.url.value, this.password.value);
+					
+				});
+
+				sceneSelect.addEventListener('change', function(e) {
+					makeThemeButtons(this.value);
+				});
+
+				themeButtons.addEventListener('click', function(e) {
+					if (e.target.nodeName === 'BUTTON') {
+						var theme = e.target.innerHTML;
+						client.sendCommand(currentSceneId, 'showTheme', theme);
+					}
+				});
+				
+			}).call(this);
+			
+		</script>
+	</body>
+</html>
