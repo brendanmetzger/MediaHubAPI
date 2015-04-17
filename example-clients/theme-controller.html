@@ -42,10 +42,8 @@
 		</div>
 
 		<div id='step3'>
-			<h2>Step 3: Trigger a theme</h2>
-			<div id='theme-buttons'>
-				
-			</div>
+			<h2>Step 3: Select theme(s) to trigger</h2>
+			<select name='themeSelect' id='theme-select' multiple></select>
 		</div>
 		
 
@@ -63,7 +61,7 @@
 					step2 = document.querySelector('#step2'),
 					step3 = document.querySelector('#step3'),
 					sceneSelect = document.querySelector('#scene-select'),
-					themeButtons = document.querySelector('#theme-buttons'),
+					themeSelect = document.querySelector('#theme-select'),
 					submitBtn = document.querySelector('#submit');
 
 				/* SETUP EVENT LISTENERS */
@@ -80,20 +78,25 @@
 
 				
 				sceneSelect.addEventListener('change', function(e) {
-					makeThemeButtons(this.value);
+					showThemes(this.value);
 				});
 
 
-				themeButtons.addEventListener('click', function(e) {
-					if (e.target.nodeName === 'BUTTON') {
+				themeSelect.addEventListener('change', function(e) {
 						var theme = e.target.innerHTML;
-						socket.emit('sendCommand', currentSceneId, 'showTheme', theme);
-					}
+						var selectedThemes = [];
+						for (var i = 0; i < this.length; i++) {
+							if (this[i].selected === true) {
+								selectedThemes.push(this[i].value);
+							}
+						}
+
+						socket.emit('sendCommand', currentSceneId, 'showThemes', selectedThemes);
 				});
 
 				function tryLogin (url, password) {
 					// connect  
-					socket = io.connect(url, {
+					socket = io(url, {
 				        forceNew: true
 				    });
 
@@ -130,23 +133,21 @@
 					});						
 				}
 
-				// make buttons for themes in scene
-				function makeThemeButtons (sceneId) {
+				function showThemes (sceneId) {
 					// hide and clear out old buttons if any
 					step3.style.opacity = 0;
-					themeButtons.innerHTML = '';
+					themeSelect.innerHTML = '';
 					currentSceneId = sceneId;
 					// get the scene json
 					socket.emit('loadScene', sceneId, function(err, scene) {
-						// make a button for each scene name
+						// make an option for each scene name
 						if (scene.themes && Object.keys(scene.themes).length > 0) {
 							for (var theme in scene.themes) {
-								var button = document.createElement('button');
-								button.innerHTML = theme;
-								themeButtons.appendChild(button);
+								var opt = document.createElement('option');
+								opt.value = theme;
+								opt.innerHTML = theme;
+								themeSelect.appendChild(opt);
 							}	
-						} else {
-							themeButtons.innerHTML = '<p>No themes in selected scene</p>';
 						}
 						
 						// show the buttons
