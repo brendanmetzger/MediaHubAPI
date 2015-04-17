@@ -51,8 +51,12 @@ Subscribe to a Scene.  Server will reply with the current Scene object.  Additio
 ##### `"unsubScene", "<id of scene>", optionalCallback(error)`
 Unsubscribe from a Scene.
 
-##### `"sendCommand", "<id of scene>", commandName, commandValue`
-Will dispatch the "command" messages to any other clients that are subscribe to that scene.
+##### `"register", "<room id>"`
+Register the client to recieve commands from other clients in that same room.
+
+##### `"sendCommand", "<room id>", "<commandName>", <command object>`
+Will dispatch the "command" messages to any other clients that are registered in the same room.
+
 
 
 ## Hub Initiated Messages
@@ -68,8 +72,8 @@ socket.on('sceneUpdate', function(scene) {
 });
 ```
 
-##### `"command", "<id of scene>", "<commandName>", commandValue`
-If another client triggers a "sendCommand", any subscribed client will recieve the command.
+##### `"command", "<room id>", "<commandName>", commandValue`
+If a client triggers a "sendCommand" to a room, any client registered in that room will recieve the command.
 
 Scene Schema
 ===========
