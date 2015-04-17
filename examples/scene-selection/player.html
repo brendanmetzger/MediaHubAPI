@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MediaHubClient as scene player</title>
+        <style>
+            #step2 {
+                opacity: 0;
+                transition: opacity 0.5s;
+            }
+
+            #scene-select {
+                height: 300px;
+            }
+
+            #status {
+                color: red;
+            }
+
+            label {
+                display: block;
+            }
+
+            button {
+                margin: 0 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>MediaHubClient as that listens for a list of possible scenes to show</h1>
+
+        
+        <h2>Step 1: Login to a hub</h2>
+        
+        <form id='login-form'>
+            <h3 id='status'></h3>
+            <label>Hub Url: <input type='url' name='url' required /></label>
+            <label>Hub Password: <input type='password' name='password' required /></label>
+            <input type='submit' id='submit' name='submit' />
+        </form>
+
+        <div id='step2'>
+            <h2>Active Scenes</h2>
+            <ul id='scene-list'>
+                
+            </ul>
+        </div>
+        
+
+        <!-- load socket.io library from active hub instance so that the client/server library
+             versions will match -->
+        <script src='http://smamediahub.azurewebsites.net/socket.io/socket.io.js'></script>
+
+        <script>
+            (function() {
+                'use strict';
+
+                var socket,
+                    errorBox = document.querySelector('#status'),
+                    step2 = document.querySelector('#step2'),
+                    sceneList = document.querySelector('#scene-list'),
+                    submitBtn = document.querySelector('#submit');
+
+                /* SETUP EVENT LISTENERS */
+                document.querySelector('#login-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    errorBox.innerHTML = '';
+                    submitBtn.disabled = true;
+                    submitBtn.value = 'Logging in...';
+                    
+                    tryLogin(this.url.value, this.password.value);
+                    
+                });
+
+                function tryLogin (url, password) {
+                    // connect 
+                    if (socket) {
+                        socket.disconnect();
+                    } 
+
+                    socket = io(url, {
+                        forceNew: true
+                    });
+
+                    socket.on('connect', function() {
+                        socket.emit('auth', {password: password}, function(err) {
+                            if (err) {
+                                showError(err);
+                            } else {
+                                step2.style.opacity = 1;
+                                socket.emit('register', 'scene-selection-demo');
+                            }
+
+                            submitBtn.disabled = false;
+                            submitBtn.value = 'Submit';
+                        });
+                    });
+
+                    socket.on('command', function(data) {
+                        if (data.name === 'showScenes') {
+                            var scenes = data.value;
+                            sceneList.innerHTML = '';
+                            for (var i = 0; i < scenes.length; i++) {
+                                var li = document.createElement('li');
+                                li.innerHTML = scenes[i].name;
+                                sceneList.appendChild(li);
+                            }
+                        }
+                    });
+                }
+
+                // update dropdown list to scene names
+                function showScenes () {
+                    // clear old options
+                    sceneSelect.innerHTML = '';
+
+                    socket.emit('listScenes', function(err, names) {
+                        // build new options with list of scenes in hub
+                        for (var i = 0; i < names.length; i++) {
+                            var opt = document.createElement('option');
+                            opt.innerHTML = names[i].name;
+                            sceneSelect.appendChild(opt);
+                        }
+
+                        step2.style.opacity = 1;
+                    });                     
+                }
+
+                function showError (msg) {
+                    errorBox.innerHTML = msg.toString();
+                }
+                
+            }).call(this);
+            
+        </script>
+    </body>
+</html>

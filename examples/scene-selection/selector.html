@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MediaHubClient as scene selector</title>
+		<style>
+			#step2 {
+				opacity: 0;
+				transition: opacity 0.5s;
+			}
+
+			#scene-select {
+				height: 300px;
+			}
+
+			#status {
+				color: red;
+			}
+
+			label {
+				display: block;
+			}
+
+			button {
+				margin: 0 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>MediaHubClient as that controls what scene is displayed on another client</h1>
+
+		
+		<h2>Step 1: Login to a hub</h2>
+		
+		<form id='login-form'>
+			<h3 id='status'></h3>
+			<label>Hub Url: <input type='url' name='url' required /></label>
+			<label>Hub Password: <input type='password' name='password' required /></label>
+			<input type='submit' id='submit' name='submit' />
+		</form>
+
+		<div id='step2'>
+			<h2>Step 2: Trigger Scene(s)</h2>
+			<label>
+				<select id='scene-select' multiple></select>
+			</label>	
+		</div>
+		
+
+		<!-- load socket.io library from active hub instance so that the client/server library
+			 versions will match -->
+		<script src='http://smamediahub.azurewebsites.net/socket.io/socket.io.js'></script>
+
+		<script>
+			(function() {
+				'use strict';
+
+				var socket,
+					errorBox = document.querySelector('#status'),
+					step2 = document.querySelector('#step2'),
+					sceneSelect = document.querySelector('#scene-select'),
+					submitBtn = document.querySelector('#submit');
+
+				/* SETUP EVENT LISTENERS */
+				document.querySelector('#login-form').addEventListener('submit', function(e) {
+					e.preventDefault();
+					
+					errorBox.innerHTML = '';
+					submitBtn.disabled = true;
+					submitBtn.value = 'Logging in...';
+					
+					tryLogin(this.url.value, this.password.value);
+					
+				});
+
+				sceneSelect.addEventListener('change', function(e) {
+						var selectedScenes = [];
+						for (var i = 0; i < this.length; i++) {
+							if (this[i].selected === true) {
+								selectedScenes.push({name: this[i].value});
+							}
+						}
+						socket.emit('sendCommand', 'scene-selection-demo', 'showScenes', selectedScenes);
+				});
+
+				function tryLogin (url, password) {
+					// connect  
+					socket = io(url, {
+				        forceNew: true
+				    });
+
+				    socket.on('connect', function() {
+				    	socket.emit('auth', {password: password}, function(err) {
+				    		if (err) {
+				    			showError(err);
+				    		} else {
+				    			showScenes();
+				    		}
+
+				    		submitBtn.disabled = false;
+				    		submitBtn.value = 'Submit';
+				    	});
+				    });
+				}
+
+				// update dropdown list to scene names
+				function showScenes () {
+					// clear old options
+					sceneSelect.innerHTML = '';
+
+					socket.emit('listScenes', function(err, names) {
+						// build new options with list of scenes in hub
+						for (var i = 0; i < names.length; i++) {
+							var opt = document.createElement('option');
+							opt.innerHTML = names[i].name;
+							sceneSelect.appendChild(opt);
+						}
+
+						step2.style.opacity = 1;
+					});						
+				}
+
+				function showError (msg) {
+					errorBox.innerHTML = msg.toString();
+				}
+				
+			}).call(this);
+			
+		</script>
+	</body>
+</html>
