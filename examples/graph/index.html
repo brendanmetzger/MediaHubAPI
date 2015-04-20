@@ -1,24 +1,44 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Digital City Graph</title>
-		<style>
+  <head>
+    <title>Digital City Graph</title>
+    <style>
+    body {
+      padding:0;
+      margin:0;
+      font-size:62.5%;
+    }
     svg {
       position: absolute;
       top:0;
       left:0;
+      z-index:1;
     }
     circle {
-      fill:rgba(0,0,0,0.5);
+      fill:#333;
+      stroke:#fff;
+      stroke-width:5;
     }
     line {
-      stroke: red;
+      stroke-width:2;
+      transition:opacity 1s;
     }
-		</style>
-	</head>
-	<body>
-    <h1>Digital City</h1>
-		<script type="text/javascript">
+    h1 {
+      position:relative;
+      z-index:2;
+      font-family:'Helvetica Neue';
+      -webkit-text-stroke: 1px rgba(255,255,255,1);
+      color:#888;
+      font-weight:200;
+      font-size:10em;
+      margin:2em 0;
+      text-align:center;
+    }
+    </style>
+  </head>
+  <body>
+    <h1>#</h1>
+    <script type="text/javascript">
       var graph   = null;
       var request = new XMLHttpRequest();
 
@@ -60,6 +80,9 @@
           width: window.innerWidth
         };
         this.viewBox = new SVG(document.body, this.dims);
+        this.viewBox.createElement('g', {
+          'class': 'edges'
+        });
         this.drawNodes(xml.querySelectorAll('Declaration > Class'));
 
         this.parseHierarchy(xml.querySelectorAll('SubClassOf'));
@@ -76,9 +99,9 @@
           for (var i = 0; i < len; i++) {
             var id = list.item(i).getAttribute('IRI');
             this.nodes[id] = {
-              element: this.viewBox.createElement('circle', {cx: i * this.dims.width / len, cy: this.dims.height / 2, r: 5, title: id}),
+              element: this.viewBox.createElement('circle', {cx: 0, cy: this.dims.height / 2, r: 5, title: id}),
               children: [],
-              edges: []
+              parents: []
             }
           }
         },
@@ -92,9 +115,10 @@
             var parent  = nodes.item(1).getAttribute('IRI');
             
             if (edge) {
-              this.edges.push([child, parent]);
+              this.edges.push({from: parent, to: child});
             } else {
               this.nodes[parent].children.push(child);
+              this.nodes[child].parents.push(parent);
             }
           }
         },
@@ -102,30 +126,55 @@
         organizeNodes: function () {
           var beijing = /^#beijing.+$/i;
           var chicago = /^#chicago.+$/i;
-          for (var node in this.nodes) {
-            var elem = this.nodes[node].element;
-            if (beijing.test(node)) {
-              elem.setAttribute('cy', this.dims.height * 0.25);
-            } else if (chicago.test(node)) {
-              elem.setAttribute('cy', this.dims.height * 0.75);
-            }
-            elem.setAttribute('r', (this.getDegree(this.nodes[node]) + 2.5));
+          var rows = {
+            top: [],
+            middle: [],
+            bottom: []            
           }
           
-          this.edges.forEach(function (pair) {
-            var from = this.nodes[pair[0]].element;
-            var to   = this.nodes[pair[1]].element;
+          for (var node in this.nodes) {
+            var elem = this.nodes[node].element;
             
-            this.viewBox.createElement('line', {
-              x1: from.getAttribute('cx'),
-              y1: from.getAttribute('cy'),
-              x2: to.getAttribute('cx'),
-              y2: to.getAttribute('cy') 
+            
+            if (beijing.test(node)) {
+              elem.setAttribute('cy', this.dims.height * 0.125);
+              elem.setAttribute('class', 'top');
+            } else if (chicago.test(node)) {
+              elem.setAttribute('cy', this.dims.height * 0.875);
+              elem.setAttribute('class', 'bottom');
+            } else {
+              elem.setAttribute('class', 'middle');
+            }
+            
+            var degree = (this.getDegree(this.nodes[node]) + 1);
+            if (degree > 1) {
+              rows[elem.getAttribute('class')].push(elem);
+            }
+            
+            elem.setAttribute('r', degree);
+          }
+          
+          for (var row in rows) {
+            rows[row].sort(function (a, b) {
+              a = parseInt(a.getAttribute('r'), 10);
+              b = parseInt(b.getAttribute('r'), 10);
+              return a == b ? 0 : a < b ? 1 : -1;
             });
             
+            for (var i = 1; i < rows[row].length; i+=2) {
+              rows[row].splice(rows[row].length - 1, 0, rows[row].splice(i, 1)[0]);
+            }
+                        
+            
+            rows[row].forEach(this.alignHorizontal.bind(this, this.dims.width / rows[row].length));
+          }
+          
+          this.edges.forEach(function (edge) {
+            var edge = this.drawEdge(this.nodes[edge.from].element, this.nodes[edge.to].element, 'green');
           }, this);
+          
         },
-        
+        // count number of children.
         getDegree: function (node) {
           var degree = node.children.length;
           node.children.forEach(function (childnode) {
@@ -133,7 +182,21 @@
           }, this);
           return degree;
         },
-
+        // from/to are nodes
+        drawEdge: function(from, to, color) {
+          return this.viewBox.createElement('line', {
+            x1: from.getAttribute('cx'),
+            y1: from.getAttribute('cy'),
+            x2: to.getAttribute('cx'),
+            y2: to.getAttribute('cy'),
+            stroke: color
+          }, this.viewBox.element.querySelector('g.edges'));
+        },
+        alignHorizontal: function (size, element, index) {
+          var key = element.getAttribute('title');
+          element.setAttribute('cx', (index * size) + (size / 2));
+        }
+        
       };
       
       
@@ -143,19 +206,34 @@
       document.body.addEventListener('mouseover', function (evt) {
         if (evt.srcElement.nodeName == 'circle') {
           var title = evt.srcElement.getAttribute('title');
-          graph.nodes[title].children.forEach(function (child) {
-            var to = graph.nodes[child].element;
-            graph.viewBox.createElement('line', {
-              x1: this.getAttribute('cx'),
-              y1: this.getAttribute('cy'),
-              x2: to.getAttribute('cx'),
-              y2: to.getAttribute('cy') 
-            });
+          graph.nodes[title].children.forEach(function (child, index) {
+            if (typeof(graph.nodes[title].children[index]) === 'string') {
+              graph.nodes[title].children[index] = graph.drawEdge(this, graph.nodes[child].element, '#7B2B83');
+              
+              graph.nodes[title].children[index].style.opacity = 0;
+            }
+            
+            setTimeout(function () {
+              graph.nodes[title].children[index].style.opacity = 1;
+            }, 10);
+            
           }, graph.nodes[title].element);
           document.querySelector('h1').innerHTML = title;
         }
       }, false);
+      
+      document.body.addEventListener('mouseout', function (evt) {
+        if (evt.srcElement.nodeName == 'circle') {
+          var title = evt.srcElement.getAttribute('title');
+          graph.nodes[title].children.forEach(function (child, index) {
+          
+            child.style.opacity = 0;
 
-		</script>
-	</body>
+          }, graph.nodes[title].element);
+          document.querySelector('h1').innerHTML = "#";
+        }
+      }, false);
+
+    </script>
+  </body>
 </html>
