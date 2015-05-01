@@ -29,9 +29,6 @@
         <Class IRI="#AlterTradition"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Amtrak"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#Art"/>
     </Declaration>
     <Declaration>
@@ -53,6 +50,9 @@
         <Class IRI="#BeijingBicycle"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#BeijingBoat"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#BeijingBus"/>
     </Declaration>
     <Declaration>
@@ -65,13 +65,13 @@
         <Class IRI="#BeijingCommuting"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#BeijingDiner"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#BeijingDistrict"/>
     </Declaration>
     <Declaration>
         <Class IRI="#BeijingDriver"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BeijingFilmAcademy"/>
     </Declaration>
     <Declaration>
         <Class IRI="#BeijingFoodVendor"/>
@@ -86,9 +86,6 @@
         <Class IRI="#BeijingLibrary"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#BeijingLibraryPatron"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#BeijingMovement"/>
     </Declaration>
     <Declaration>
@@ -98,13 +95,7 @@
         <Class IRI="#BeijingMusician"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#BeijingNeighborhood"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#BeijingPeople"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#BeijingPersonalAutomobile"/>
     </Declaration>
     <Declaration>
         <Class IRI="#BeijingPoliceman"/>
@@ -113,10 +104,10 @@
         <Class IRI="#BeijingPublicSpace"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#BeijingRingRoad"/>
+        <Class IRI="#BeijingScooter"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#BeijingScooter"/>
+        <Class IRI="#BeijingStudent"/>
     </Declaration>
     <Declaration>
         <Class IRI="#BeijingSubway"/>
@@ -125,16 +116,13 @@
         <Class IRI="#BeijingTaxi"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#BeijingTrainStation"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#BeijingTransportation"/>
     </Declaration>
     <Declaration>
         <Class IRI="#BeijingVisitor"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#BreakingImageBarriers"/>
+        <Class IRI="#BreakingBarriers"/>
     </Declaration>
     <Declaration>
         <Class IRI="#CargoScooter"/>
@@ -164,9 +152,6 @@
         <Class IRI="#ChicagoBus"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ChicagoBusTerminal"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#ChicagoCity"/>
     </Declaration>
     <Declaration>
@@ -176,16 +161,7 @@
         <Class IRI="#ChicagoCommuting"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ChicagoDiner"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ChicagoDistrict"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#ChicagoDriver"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ChicagoEL&amp;Subway"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ChicagoFoodVendor"/>
@@ -198,15 +174,6 @@
     </Declaration>
     <Declaration>
         <Class IRI="#ChicagoLibrary"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ChicagoLibraryPatron"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ChicagoLoop"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ChicagoMetra"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ChicagoMovement"/>
@@ -224,9 +191,6 @@
         <Class IRI="#ChicagoPeople"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ChicagoPersonalAutomobile"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#ChicagoPoliceman"/>
     </Declaration>
     <Declaration>
@@ -236,13 +200,13 @@
         <Class IRI="#ChicagoRailyard"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ChicagoRoadway"/>
+        <Class IRI="#ChicagoRiver"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ChicagoStudent"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ChicagoTaxi"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ChicagoTrainStation"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ChicagoTransportation"/>
@@ -251,10 +215,13 @@
         <Class IRI="#ChicagoVisitor"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ChicagoWard"/>
+        <Class IRI="#Chinatown"/>
     </Declaration>
     <Declaration>
         <Class IRI="#City"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ColumbiaCollegeChicago"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Commuter"/>
@@ -263,19 +230,16 @@
         <Class IRI="#Commuting"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Cook"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#Corporations"/>
     </Declaration>
     <Declaration>
         <Class IRI="#CulturalExchange"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Diner"/>
+        <Class IRI="#DongCheng"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Divvy"/>
+        <Class IRI="#Downtown"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Driver"/>
@@ -290,28 +254,25 @@
         <Class IRI="#FoodVendor"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#Generations"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#InterpretArt"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Knowledge"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#LakeshoreDrive"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#LearningFromMyPeers"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#LearningFromPreviousGenerations"/>
+        <Class IRI="#Lakefront"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Librarian"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#MakeALiving"/>
+        <Class IRI="#LincolnPark"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#MethodsOfTeaching"/>
+        <Class IRI="#MakeALiving"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Movement"/>
@@ -320,7 +281,13 @@
         <Class IRI="#Musician"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#PeerLearning"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#People"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Pilsen"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Policeman"/>
@@ -338,13 +305,37 @@
         <Class IRI="#SouthLoop"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#StreetLife"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Teaching"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#TheEL"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#TiananmenSquare"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#TraditionAndTransition"/>
+        <Class IRI="#Tradition-Transition"/>
     </Declaration>
     <Declaration>
         <Class IRI="#TranscendLanguage"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#WangfujingStreet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Wudaokou"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#sceneChiCulture"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#sceneTSquareKids"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#sceneUrbanSpaces"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#asAn"/>
@@ -369,6 +360,9 @@
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#givesAccessTo"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasScene"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#hosts"/>
@@ -412,17 +406,6 @@
         <Class IRI="#Art"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Amtrak"/>
-        <Class IRI="#ChicagoTransportation"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Amtrak"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#connectsTo"/>
-            <Class IRI="#ChicagoTrainStation"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#Art"/>
         <Class IRI="#Self-Expression"/>
     </SubClassOf>
@@ -435,7 +418,7 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Artist"/>
-        <Class IRI="#People"/>
+        <Class IRI="#Self-Expression"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Artist"/>
@@ -483,6 +466,10 @@
         <Class IRI="#BeijingTransportation"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#BeijingBoat"/>
+        <Class IRI="#BeijingTransportation"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#BeijingBus"/>
         <Class IRI="#BeijingTransportation"/>
     </SubClassOf>
@@ -511,21 +498,6 @@
         <Class IRI="#Commuting"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#BeijingDiner"/>
-        <Class IRI="#BeijingPeople"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#BeijingDiner"/>
-        <Class IRI="#Diner"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#BeijingDiner"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#patronizes"/>
-            <Class IRI="#BeijingFoodVendor"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#BeijingDistrict"/>
         <Class IRI="#BeijingCity"/>
     </SubClassOf>
@@ -538,12 +510,12 @@
         <Class IRI="#Driver"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#BeijingFoodVendor"/>
-        <Class IRI="#BeijingPeople"/>
+        <Class IRI="#BeijingFilmAcademy"/>
+        <Class IRI="#BeijingCity"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#BeijingFoodVendor"/>
-        <Class IRI="#Cook"/>
+        <Class IRI="#BeijingPeople"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#BeijingFoodVendor"/>
@@ -552,13 +524,6 @@
     <SubClassOf>
         <Class IRI="#BeijingFoodVendor"/>
         <Class IRI="#Proprietor"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#BeijingFoodVendor"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#serves"/>
-            <Class IRI="#BeijingDiner"/>
-        </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#BeijingGallery"/>
@@ -594,18 +559,7 @@
         <Class IRI="#BeijingLibrary"/>
         <ObjectSomeValuesFrom>
             <ObjectProperty IRI="#hosts"/>
-            <Class IRI="#BeijingLibraryPatron"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#BeijingLibraryPatron"/>
-        <Class IRI="#BeijingPeople"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#BeijingLibraryPatron"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#visits"/>
-            <Class IRI="#BeijingLibrary"/>
+            <Class IRI="#BeijingStudent"/>
         </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
@@ -629,11 +583,11 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#BeijingMusician"/>
-        <Class IRI="#Musician"/>
+        <Class IRI="#BeijingPeople"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#BeijingNeighborhood"/>
-        <Class IRI="#BeijingCity"/>
+        <Class IRI="#BeijingMusician"/>
+        <Class IRI="#Musician"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#BeijingPeople"/>
@@ -644,10 +598,6 @@
         <Class IRI="#People"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#BeijingPersonalAutomobile"/>
-        <Class IRI="#BeijingTransportation"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#BeijingPoliceman"/>
         <Class IRI="#BeijingPeople"/>
     </SubClassOf>
@@ -656,16 +606,37 @@
         <Class IRI="#Policeman"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#BeijingPoliceman"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneTSquareKids"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#BeijingPublicSpace"/>
         <Class IRI="#BeijingCity"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#BeijingRingRoad"/>
-        <Class IRI="#BeijingTransportation"/>
+        <Class IRI="#BeijingPublicSpace"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneTSquareKids"/>
+        </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#BeijingScooter"/>
         <Class IRI="#BeijingTransportation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BeijingStudent"/>
+        <Class IRI="#BeijingPeople"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BeijingStudent"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#visits"/>
+            <Class IRI="#BeijingLibrary"/>
+        </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#BeijingSubway"/>
@@ -676,14 +647,6 @@
         <Class IRI="#BeijingTransportation"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#BeijingTrainStation"/>
-        <Class IRI="#BeijingCity"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#BeijingTrainStation"/>
-        <Class IRI="#BeijingMovement"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#BeijingTransportation"/>
         <Class IRI="#BeijingMovement"/>
     </SubClassOf>
@@ -692,16 +655,16 @@
         <Class IRI="#BeijingPeople"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#BreakingImageBarriers"/>
+        <Class IRI="#BreakingBarriers"/>
         <Class IRI="#CulturalExchange"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#BreakingImageBarriers"/>
+        <Class IRI="#BreakingBarriers"/>
         <Class IRI="#Knowledge"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#CargoScooter"/>
-        <Class IRI="#BeijingScooter"/>
+        <Class IRI="#BeijingTransportation"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ChallengeTaboo"/>
@@ -730,6 +693,13 @@
     <SubClassOf>
         <Class IRI="#ChicagoArtwork"/>
         <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneUrbanSpaces"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ChicagoArtwork"/>
+        <ObjectSomeValuesFrom>
             <ObjectProperty IRI="#isDisplayedAt"/>
             <Class IRI="#ChicagoGallery"/>
         </ObjectSomeValuesFrom>
@@ -752,14 +722,6 @@
     <SubClassOf>
         <Class IRI="#ChicagoBus"/>
         <Class IRI="#ChicagoTransportation"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoBusTerminal"/>
-        <Class IRI="#ChicagoCity"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoBusTerminal"/>
-        <Class IRI="#ChicagoMovement"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ChicagoCity"/>
@@ -786,25 +748,6 @@
         <Class IRI="#Commuting"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ChicagoDiner"/>
-        <Class IRI="#ChicagoPeople"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoDiner"/>
-        <Class IRI="#Diner"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoDiner"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#patronizes"/>
-            <Class IRI="#ChicagoFoodVendor"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoDistrict"/>
-        <Class IRI="#ChicagoCity"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#ChicagoDriver"/>
         <Class IRI="#ChicagoPeople"/>
     </SubClassOf>
@@ -813,16 +756,8 @@
         <Class IRI="#Driver"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ChicagoEL&amp;Subway"/>
-        <Class IRI="#ChicagoTransportation"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#ChicagoFoodVendor"/>
         <Class IRI="#ChicagoPeople"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoFoodVendor"/>
-        <Class IRI="#Cook"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ChicagoFoodVendor"/>
@@ -831,13 +766,6 @@
     <SubClassOf>
         <Class IRI="#ChicagoFoodVendor"/>
         <Class IRI="#Proprietor"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoFoodVendor"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#serves"/>
-            <Class IRI="#ChicagoDiner"/>
-        </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ChicagoGallery"/>
@@ -873,33 +801,7 @@
         <Class IRI="#ChicagoLibrary"/>
         <ObjectSomeValuesFrom>
             <ObjectProperty IRI="#hosts"/>
-            <Class IRI="#ChicagoLibraryPatron"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoLibraryPatron"/>
-        <Class IRI="#ChicagoPeople"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoLibraryPatron"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#visits"/>
-            <Class IRI="#ChicagoLibrary"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoLoop"/>
-        <Class IRI="#ChicagoDistrict"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoMetra"/>
-        <Class IRI="#ChicagoTransportation"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoMetra"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#connectsTo"/>
-            <Class IRI="#ChicagoTrainStation"/>
+            <Class IRI="#ChicagoStudent"/>
         </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
@@ -930,6 +832,13 @@
         <Class IRI="#Musician"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#ChicagoMusician"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneChiCulture"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#ChicagoNeighborhood"/>
         <Class IRI="#ChicagoCity"/>
     </SubClassOf>
@@ -940,10 +849,6 @@
     <SubClassOf>
         <Class IRI="#ChicagoPeople"/>
         <Class IRI="#People"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoPersonalAutomobile"/>
-        <Class IRI="#ChicagoTransportation"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ChicagoPoliceman"/>
@@ -958,6 +863,13 @@
         <Class IRI="#ChicagoCity"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#ChicagoPublicSpace"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneUrbanSpaces"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#ChicagoRailyard"/>
         <Class IRI="#ChicagoCity"/>
     </SubClassOf>
@@ -966,34 +878,30 @@
         <Class IRI="#ChicagoMovement"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ChicagoRoadway"/>
-        <Class IRI="#ChicagoTransportation"/>
+        <Class IRI="#ChicagoRailyard"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneChiCulture"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ChicagoRiver"/>
+        <Class IRI="#ChicagoCity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ChicagoStudent"/>
+        <Class IRI="#ChicagoPeople"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ChicagoStudent"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#visits"/>
+            <Class IRI="#ChicagoLibrary"/>
+        </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ChicagoTaxi"/>
         <Class IRI="#ChicagoTransportation"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoTrainStation"/>
-        <Class IRI="#ChicagoCity"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoTrainStation"/>
-        <Class IRI="#ChicagoMovement"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoTrainStation"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#givesAccessTo"/>
-            <Class IRI="#Amtrak"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ChicagoTrainStation"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#givesAccessTo"/>
-            <Class IRI="#ChicagoMetra"/>
-        </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ChicagoTransportation"/>
@@ -1004,12 +912,30 @@
         <Class IRI="#ChicagoPeople"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ChicagoWard"/>
-        <Class IRI="#ChicagoDistrict"/>
+        <Class IRI="#ChicagoVisitor"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneChiCulture"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Chinatown"/>
+        <Class IRI="#ChicagoNeighborhood"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Chinatown"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneUrbanSpaces"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ColumbiaCollegeChicago"/>
+        <Class IRI="#ChicagoCity"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Commuter"/>
-        <Class IRI="#People"/>
+        <Class IRI="#MakeALiving"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Commuter"/>
@@ -1030,17 +956,6 @@
         </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Cook"/>
-        <Class IRI="#People"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Cook"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#prepares"/>
-            <Class IRI="#Food"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#Corporations"/>
         <Class IRI="#CulturalExchange"/>
     </SubClassOf>
@@ -1049,19 +964,19 @@
         <Class IRI="#Movement"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Diner"/>
-        <Class IRI="#People"/>
+        <Class IRI="#DongCheng"/>
+        <Class IRI="#BeijingDistrict"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Diner"/>
+        <Class IRI="#Downtown"/>
+        <Class IRI="#ChicagoNeighborhood"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Downtown"/>
         <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#consumes"/>
-            <Class IRI="#Food"/>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneChiCulture"/>
         </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Divvy"/>
-        <Class IRI="#ChicagoBicycle"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Driver"/>
@@ -1072,21 +987,21 @@
         <Class IRI="#Self-Expression"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#Fashion"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneTSquareKids"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#Food"/>
         <Class IRI="#Self-Expression"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Food"/>
         <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#isConsumedBy"/>
-            <Class IRI="#Diner"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Food"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#isPreparedBy"/>
-            <Class IRI="#Cook"/>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneUrbanSpaces"/>
         </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
@@ -1108,6 +1023,10 @@
         </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#Generations"/>
+        <Class IRI="#Knowledge"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#InterpretArt"/>
         <Class IRI="#Art"/>
     </SubClassOf>
@@ -1116,44 +1035,50 @@
         <Class IRI="#People"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#LakeshoreDrive"/>
-        <Class IRI="#ChicagoRoadway"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#LearningFromMyPeers"/>
-        <Class IRI="#CulturalExchange"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#LearningFromMyPeers"/>
-        <Class IRI="#Knowledge"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#LearningFromPreviousGenerations"/>
-        <Class IRI="#Knowledge"/>
+        <Class IRI="#Lakefront"/>
+        <Class IRI="#ChicagoCity"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Librarian"/>
         <Class IRI="#MakeALiving"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#LincolnPark"/>
+        <Class IRI="#ChicagoNeighborhood"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#MakeALiving"/>
         <Class IRI="#People"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#MethodsOfTeaching"/>
+        <Class IRI="#Musician"/>
+        <Class IRI="#Self-Expression"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Musician"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#creates"/>
+            <Class IRI="#Art"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PeerLearning"/>
         <Class IRI="#CulturalExchange"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#MethodsOfTeaching"/>
+        <Class IRI="#PeerLearning"/>
         <Class IRI="#Knowledge"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Musician"/>
-        <Class IRI="#BeijingPeople"/>
+        <Class IRI="#Pilsen"/>
+        <Class IRI="#ChicagoNeighborhood"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Musician"/>
-        <Class IRI="#People"/>
+        <Class IRI="#Pilsen"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneUrbanSpaces"/>
+        </ObjectSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Policeman"/>
@@ -1173,19 +1098,57 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#SouthLoop"/>
-        <Class IRI="#ChicagoDistrict"/>
+        <Class IRI="#ChicagoNeighborhood"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#StreetLife"/>
+        <Class IRI="#City"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#StreetLife"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneUrbanSpaces"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Teaching"/>
+        <Class IRI="#CulturalExchange"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Teaching"/>
+        <Class IRI="#Knowledge"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TheEL"/>
+        <Class IRI="#ChicagoTransportation"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#TiananmenSquare"/>
         <Class IRI="#BeijingDistrict"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#TraditionAndTransition"/>
+        <Class IRI="#TiananmenSquare"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasScene"/>
+            <Class IRI="#sceneTSquareKids"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Tradition-Transition"/>
         <Class IRI="#Knowledge"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#TranscendLanguage"/>
         <Class IRI="#Art"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#WangfujingStreet"/>
+        <Class IRI="#BeijingDistrict"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Wudaokou"/>
+        <Class IRI="#BeijingDistrict"/>
     </SubClassOf>
 </Ontology>
 

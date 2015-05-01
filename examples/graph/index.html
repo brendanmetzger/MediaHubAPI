@@ -17,7 +17,8 @@
     circle {
       fill:#333;
       stroke:#fff;
-      stroke-width:5;
+      stroke-width:2;
+      cursor:pointer;
     }
     line {
       stroke-width:2;
@@ -25,30 +26,38 @@
     }
     h1 {
       position:relative;
-      z-index:2;
+      z-index:0;
       font-family:'Helvetica Neue';
       -webkit-text-stroke: 1px rgba(255,255,255,1);
       color:#888;
       font-weight:200;
       font-size:10em;
-      margin:2em 0;
+      margin:3em 0;
       text-align:center;
     }
     </style>
   </head>
   <body>
+    <div id="graph"></div>
     <h1>#</h1>
     <script type="text/javascript">
       var graph   = null;
       var request = new XMLHttpRequest();
 
-      request.open('GET', 'owl.xml');
+      request.open('GET', 'GDC_installation_GUI_v2_SceneTest.xml');
       request.setRequestHeader("Content-Type", "text/xml");
 
       request.onreadystatechange = function () {
         if (request.readyState === 4) {
           if (request.status === 200) {
-            graph = new Graph(request.responseXML);          
+            graph  = new Graph(request.responseXML);
+            layout = new Layout(graph);  
+            layout.prefix.push('Chicago');
+            layout.prefix.push('Beijing');
+            layout.super.push('People');
+            layout.super.push('City');
+            layout.super.push('Movement');
+            layout.arrange();
           } else {
             console.error(response);
           }
@@ -73,106 +82,99 @@
         return (parent || this.element).appendChild(node);
       };
       
+      function Layout(graph) {
+        this.graph = graph;
+      }
+      
+      Layout.prototype = {
+        prefix: [],
+        super: [],
+        arrange: function () {
+          for (var id in this.graph.nodes) {
+            var elem = this.graph.nodes[id].element, idx = -1;
+            idx = this.prefix.indexOf(id);
+            if (idx >= 0) {
+              elem.setAttribute('cx', this.graph.options.width * idx);
+              elem.setAttribute('cy', this.graph.options.height / 2);
+              elem.setAttribute('r', 100);
+              console.log('vertical divide', id);
+            }
+            idx = this.super.indexOf(id);
+            if (idx >= 0) {
+              console.log('main', id);
+              elem.setAttribute('cx', (this.graph.options.width / this.super.length) * idx + this.graph.options.width / this.super.length / 2);
+              elem.setAttribute('cy', this.graph.options.height - this.graph.options.height / 3);
+              elem.setAttribute('r', 50);
+            }
+          }
+
+        }
+      };
+      
       
       function Graph(xml) {
-        this.dims = {
+        this.options = {
           height: window.innerHeight,
           width: window.innerWidth
         };
-        this.viewBox = new SVG(document.body, this.dims);
+        this.viewBox = new SVG(document.getElementById('graph'), this.options);
         this.viewBox.createElement('g', {
           'class': 'edges'
         });
         this.drawNodes(xml.querySelectorAll('Declaration > Class'));
-
         this.parseHierarchy(xml.querySelectorAll('SubClassOf'));
-        
-        this.organizeNodes();
       }
       
       Graph.prototype = {
         viewBox: null,
         nodes: {},
         edges: [],
+        scenes: [],
         drawNodes: function (list) {
           var len = list.length;
           for (var i = 0; i < len; i++) {
-            var id = list.item(i).getAttribute('IRI');
+            var id = list.item(i).getAttribute('IRI').substring(1);
+            var random_offset = (Math.random() * this.options.width / 2 ) * ((Math.random() > 0.5) ? -1 : 1);
             this.nodes[id] = {
-              element: this.viewBox.createElement('circle', {cx: 0, cy: this.dims.height / 2, r: 5, title: id}),
+              element: this.viewBox.createElement('circle', {cx: (this.options.width / 2) + random_offset, cy: (150 + Math.random() * 100 * ((Math.random() > 0.5) ? -1 : 1)), r: 10, title: id}),
               children: [],
-              parents: []
+              parents: [],
+              scenes: []
             }
           }
         },
         parseHierarchy: function (subclasses) {
-
           for (var i = 0; i < subclasses.length; i++) {
             var edge = subclasses.item(i).querySelector('ObjectSomeValuesFrom');
             var nodes = subclasses.item(i).querySelectorAll('Class');
             
-            var child   = nodes.item(0).getAttribute('IRI');
-            var parent  = nodes.item(1).getAttribute('IRI');
+            var child   = nodes.item(0).getAttribute('IRI').substring(1);
+            var parent  = nodes.item(1).getAttribute('IRI').substring(1);
             
             if (edge) {
-              this.edges.push({from: parent, to: child});
+              if (edge.querySelector('ObjectProperty').getAttribute('IRI') == '#hasScene') {
+                this.scenes.push(parent);
+                this.nodes[child].scenes.push(parent)
+              } else {
+                this.edges.push({from: parent, to: child});
+              }
+              
             } else {
               this.nodes[parent].children.push(child);
               this.nodes[child].parents.push(parent);
             }
           }
+          this.removeOrphans();
         },
-        
-        organizeNodes: function () {
-          var beijing = /^#beijing.+$/i;
-          var chicago = /^#chicago.+$/i;
-          var rows = {
-            top: [],
-            middle: [],
-            bottom: []            
-          }
-          
+        removeOrphans: function () {
           for (var node in this.nodes) {
-            var elem = this.nodes[node].element;
-            
-            
-            if (beijing.test(node)) {
-              elem.setAttribute('cy', this.dims.height * 0.125);
-              elem.setAttribute('class', 'top');
-            } else if (chicago.test(node)) {
-              elem.setAttribute('cy', this.dims.height * 0.875);
-              elem.setAttribute('class', 'bottom');
-            } else {
-              elem.setAttribute('class', 'middle');
+            var obj = this.nodes[node];
+            // an orphan will not have children, parents, or scenes after parsing (these are essentially scenes)
+            if ((obj.scenes.length + obj.parents.length + obj.children.length) < 1) {
+              obj.element.parentNode.removeChild(obj.element);
+              delete this.nodes[node];
             }
-            
-            var degree = (this.getDegree(this.nodes[node]) + 1);
-            if (degree > 1) {
-              rows[elem.getAttribute('class')].push(elem);
-            }
-            
-            elem.setAttribute('r', degree);
           }
-          
-          for (var row in rows) {
-            rows[row].sort(function (a, b) {
-              a = parseInt(a.getAttribute('r'), 10);
-              b = parseInt(b.getAttribute('r'), 10);
-              return a == b ? 0 : a < b ? 1 : -1;
-            });
-            
-            for (var i = 1; i < rows[row].length; i+=2) {
-              rows[row].splice(rows[row].length - 1, 0, rows[row].splice(i, 1)[0]);
-            }
-                        
-            
-            rows[row].forEach(this.alignHorizontal.bind(this, this.dims.width / rows[row].length));
-          }
-          
-          this.edges.forEach(function (edge) {
-            var edge = this.drawEdge(this.nodes[edge.from].element, this.nodes[edge.to].element, 'green');
-          }, this);
-          
         },
         // count number of children.
         getDegree: function (node) {
@@ -192,6 +194,16 @@
             stroke: color
           }, this.viewBox.element.querySelector('g.edges'));
         },
+        getScenes: function (node) {
+          var scenes = node.scenes;
+          node.children.forEach(function (childnode) {
+            scenes = scenes.concat(this.getScenes(this.nodes[childnode]));
+          }, this);
+          return scenes.reduce(function (principle, current) {
+            if (principle.indexOf(current) < 0) principle.push(current);
+            return principle;
+          }, []);
+        },
         alignHorizontal: function (size, element, index) {
           var key = element.getAttribute('title');
           element.setAttribute('cx', (index * size) + (size / 2));
@@ -202,23 +214,22 @@
       
       // Get the XML
       request.send();
-      
+      var lines = {};
       document.body.addEventListener('mouseover', function (evt) {
         if (evt.srcElement.nodeName == 'circle') {
           var title = evt.srcElement.getAttribute('title');
           graph.nodes[title].children.forEach(function (child, index) {
-            if (typeof(graph.nodes[title].children[index]) === 'string') {
-              graph.nodes[title].children[index] = graph.drawEdge(this, graph.nodes[child].element, '#7B2B83');
-              
-              graph.nodes[title].children[index].style.opacity = 0;
+            if (! lines[child]) {
+              lines[child] = graph.drawEdge(this, graph.nodes[child].element, '#7B2B83');
+              lines[child].style.opacity = 0;
             }
-            
+                        
             setTimeout(function () {
-              graph.nodes[title].children[index].style.opacity = 1;
+              lines[child].style.opacity = 1;
             }, 10);
             
           }, graph.nodes[title].element);
-          document.querySelector('h1').innerHTML = title;
+          document.querySelector('h1').innerHTML = title.replace(/([a-z])([A-Z])(?=[a-z])/g, '$1 $2');
         }
       }, false);
       
@@ -227,10 +238,30 @@
           var title = evt.srcElement.getAttribute('title');
           graph.nodes[title].children.forEach(function (child, index) {
           
-            child.style.opacity = 0;
+            lines[child].style.opacity = 0;
 
           }, graph.nodes[title].element);
           document.querySelector('h1').innerHTML = "#";
+        }
+      }, false);
+      
+      document.body.addEventListener('click', function (evt) {
+        if (evt.srcElement.nodeName == 'circle') {
+          var title = evt.srcElement.getAttribute('title');
+          var scenes = graph.getScenes(graph.nodes[title]);
+          console.log(scenes);
+          // graph.nodes[title].children.forEach(function (child, index) {
+          //   if (typeof(graph.nodes[title].children[index]) === 'string') {
+          //     graph.nodes[title].children[index] = graph.drawEdge(this, graph.nodes[child].element, '#7B2B83');
+          //     graph.nodes[title].children[index].style.opacity = 0;
+          //   }
+          //
+          //   setTimeout(function () {
+          //     graph.nodes[title].children[index].style.opacity = 1;
+          //   }, 10);
+          //
+          // }, graph.nodes[title].element);
+          // console.log(title.replace(/([a-z])([A-Z])(?=[a-z])/g, '$1 $2'));
         }
       }, false);
 
