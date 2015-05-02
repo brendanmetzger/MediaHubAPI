@@ -46,9 +46,9 @@
   </head>
   <body>
     <div id="graph">
-  		<form action="http://smamediahub.azurewebsites.net">
-  			<input type='password' name='password' placeholder="Enter Password" />
-  		</form>
+      <form action="http://smamediahub.azurewebsites.net">
+        <input type='password' name='password' placeholder="Enter Password" />
+      </form>
     </div>
     <h1>^</h1>
     <script type="text/javascript">
@@ -71,21 +71,21 @@
           input.placeholder += '.';
         }, 250);
         
-				socket = io( this.action, { forceNew: true });
+        socket = io( this.action, { forceNew: true });
         socket.on('connect', function() {
-			    
+          
           socket.emit('auth', {password: password}, function (err) {
             clearTimeout(timeout);
-			    	if (err) {
-			    		input.setAttribute('placeholder', 'Try again');
-			    	} else {
+            if (err) {
+              input.setAttribute('placeholder', 'Try again');
+            } else {
               // Remove Form
               this.parentNode.removeChild(this);
               // Get the Graph XML
               request.send();
-			    	}
-			    	}.bind(this));
-			    }.bind(this));
+            }
+            }.bind(this));
+          }.bind(this));
       });
       
       
@@ -157,7 +157,7 @@
         }
       };
       
-			
+      
       
       
       function Graph(xml) {
