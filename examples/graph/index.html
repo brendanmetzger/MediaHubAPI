@@ -8,6 +8,12 @@
       margin:0;
       font-size:62.5%;
     }
+    input {
+      font-size:2em;
+      padding:1em;
+      margin:5em auto 0;
+      display:block;
+    }
     svg {
       position: absolute;
       top:0;
@@ -36,13 +42,53 @@
       text-align:center;
     }
     </style>
+    <script src='http://smamediahub.azurewebsites.net/socket.io/socket.io.js'></script>
   </head>
   <body>
-    <div id="graph"></div>
-    <h1>#</h1>
+    <div id="graph">
+  		<form action="http://smamediahub.azurewebsites.net">
+  			<input type='password' name='password' placeholder="Enter Password" />
+  		</form>
+    </div>
+    <h1>^</h1>
     <script type="text/javascript">
+      'use strict';
+      
+      var socket  = null;
       var graph   = null;
+      var layout  = null;
       var request = new XMLHttpRequest();
+      
+      
+      document.querySelector('div#graph form').addEventListener('submit', function (evt) {
+        evt.preventDefault();
+        var input = this.querySelector('input[name=password]');
+        var password = input.value;
+        
+        input.value = '';
+        input.placeholder = 'sending';
+        var timeout = setInterval(function () {
+          input.placeholder += '.';
+        }, 250);
+        
+				socket = io( this.action, { forceNew: true });
+        socket.on('connect', function() {
+			    
+          socket.emit('auth', {password: password}, function (err) {
+            clearTimeout(timeout);
+			    	if (err) {
+			    		input.setAttribute('placeholder', 'Try again');
+			    	} else {
+              // Remove Form
+              this.parentNode.removeChild(this);
+              // Get the Graph XML
+              request.send();
+			    	}
+			    	}.bind(this));
+			    }.bind(this));
+      });
+      
+      
 
       request.open('GET', 'GDC_installation_GUI_v2_SceneTest.xml');
       request.setRequestHeader("Content-Type", "text/xml");
@@ -110,6 +156,8 @@
 
         }
       };
+      
+			
       
       
       function Graph(xml) {
@@ -211,9 +259,6 @@
         
       };
       
-      
-      // Get the XML
-      request.send();
       var lines = {};
       document.body.addEventListener('mouseover', function (evt) {
         if (evt.srcElement.nodeName == 'circle') {
@@ -250,18 +295,10 @@
           var title = evt.srcElement.getAttribute('title');
           var scenes = graph.getScenes(graph.nodes[title]);
           console.log(scenes);
-          // graph.nodes[title].children.forEach(function (child, index) {
-          //   if (typeof(graph.nodes[title].children[index]) === 'string') {
-          //     graph.nodes[title].children[index] = graph.drawEdge(this, graph.nodes[child].element, '#7B2B83');
-          //     graph.nodes[title].children[index].style.opacity = 0;
-          //   }
-          //
-          //   setTimeout(function () {
-          //     graph.nodes[title].children[index].style.opacity = 1;
-          //   }, 10);
-          //
-          // }, graph.nodes[title].element);
-          // console.log(title.replace(/([a-z])([A-Z])(?=[a-z])/g, '$1 $2'));
+          // scenes mapped to this format [{name:'scene'}, {name:'otherscene}...]
+          socket.emit('sendCommand', 'scene-selection-demo', 'showScenes', scenes.map(function (scene) {
+            return {'name': scene};
+          }));
         }
       }, false);
 
