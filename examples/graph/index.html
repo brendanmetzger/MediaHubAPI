@@ -90,7 +90,7 @@
       
       
 
-      request.open('GET', 'GDC_installation_GUI_v2_SceneTest.xml');
+      request.open('GET', 'GDC_installation_GUI_v3_studentScenes.xml');
       request.setRequestHeader("Content-Type", "text/xml");
 
       request.onreadystatechange = function () {
@@ -200,9 +200,9 @@
             var parent  = nodes.item(1).getAttribute('IRI').substring(1);
             
             if (edge) {
-              if (edge.querySelector('ObjectProperty').getAttribute('IRI') == '#hasScene') {
-                this.scenes.push(parent);
-                this.nodes[child].scenes.push(parent)
+              if (edge.querySelector('ObjectProperty').getAttribute('IRI') == '#isSceneOf') {
+                this.scenes.push(child);
+                this.nodes[parent].scenes.push(child)
               } else {
                 this.edges.push({from: parent, to: child});
               }
